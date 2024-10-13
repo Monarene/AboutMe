@@ -8,34 +8,32 @@ import android.view.inputmethod.InputMethodManager
 
 import androidx.databinding.DataBindingUtil
 import com.example.aboutme.databinding.ActivityMainBinding
+import com.example.aboutme.MyName
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    private val myName: MyName = MyName("Michael Mekuleyi")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-        binding  = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-//        findViewById<Button>(R.id.done_button).setOnClickListener{
-//            addNickname(it)
-//        }
+        binding  = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.myName = myName
+
+
         binding.doneButton.setOnClickListener{
             addNickname(it)
         }
     }
 
     private fun addNickname(view: View) {
-//        val editText = findViewById<EditText>(R.id.nickname_edit)
-//        val nicknameTextView = findViewById<TextView>(R.id.nickname_text)
-//
-//        nicknameTextView.text = editText.text
-//        editText.visibility = View.GONE
-//        view.visibility = View.GONE
-//        nicknameTextView.visibility = View.VISIBLE
+
 
         binding.apply {
             nicknameText.text = binding.nicknameEdit.text
+            myName?.nickname = nicknameEdit.text.toString()
             invalidateAll()
             nicknameEdit.visibility = View.GONE
             doneButton.visibility = View.GONE
